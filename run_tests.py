@@ -12,20 +12,19 @@ subprocess.run(["gcc", "-O2", "-o", exe, src, "-lm"], check=True)
 
 mpmath.mp.dps = 50
 
-# Fixed vectors: x = [sqrt(2), 1-delta, 1-delta], dx = [0.5, 1, 1]
-x0  = math.sqrt(2)
-dx0 = 0.5
-dx1 = np.array([1.0, 1.0])
-
-a = dx0**2 - np.dot(dx1, dx1)   # -1.75, constant
-
-# delta sweeps from 1 toward 0 — one root → 0, other → away from 1
+# delta sweeps from 1 toward 0. x approaches the boundary of the cone and dx becomes shorter (as would happen in IPM convergence).
 deltas = [10**(-k) for k in range(16)]
 
 test_cases      = []
 true_small_roots = []   # root near 0 (max of the two, since a < 0)
 
 for delta in deltas:
+    # x = [sqrt(2), 1-delta, 1-delta], dx = [0.5, 1, 1] * delta
+    x0  = math.sqrt(2)
+    dx0 = 1 * delta
+    dx1 = np.array([2.0, 2.0]) * delta
+    a = dx0**2 - np.dot(dx1, dx1)
+
     x1 = np.array([1 - delta, 1 - delta])
     b  = 2 * (x0 * dx0 - np.dot(x1, dx1))
     c  = x0**2 - np.dot(x1, x1)
