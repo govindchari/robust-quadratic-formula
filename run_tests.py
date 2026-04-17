@@ -59,11 +59,13 @@ for delta, true_r, nv, sv in zip(deltas, true_small_roots, naive_small, smart_sm
     err_smart.append(es)
     print(f"{delta:>10.0e}  {true_r:>22.15g} {nv:>22.15g} {sv:>22.15g}  {en:>12.3e} {es:>12.3e}")
 
+plt.rcParams["text.usetex"] = True
+plt.rcParams["font.family"] = "serif"
 fig, ax = plt.subplots(figsize=(8, 5))
-ax.loglog(deltas, err_naive, "o-", label="naive_quadratic")
-ax.loglog(deltas, err_smart, "s-", label="smart_quadratic")
+ax.loglog(deltas, err_naive, "o-", label="quadratic")
+ax.loglog(deltas, err_smart, "s-", label="citardauq")
 ax.invert_xaxis()
-ax.set_xlabel("delta  (decreasing →  initial point approaching cone boundary)")
+ax.set_xlabel("delta  (decreasing →  iterate approaches cone boundary)")
 ax.set_ylabel("relative error in step length")
 ax.set_title("Relative error in step length as cone boundary is approached")
 ax.legend()
