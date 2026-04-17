@@ -7,5 +7,5 @@ Traditionally, the quadratic formula is used, but as the iterate approaches the 
 The [citardauq formula](https://en.wikipedia.org/wiki/Quadratic_formula#Square_root_in_the_denominator) avoids this catastrophic cancellation. This repository contains an implementation of both formulas and a test case which mimics the iterate of QOCO approaching the cone boundary. It can be seen that the quadratic formula incurs a large error as the boundary is approached, but the citardauq formula does not.
 
 <p align="center">
-  <img src="./error_vs_delta.png" width="600">
+  <img src="./step_length_error.png" width="600">
 </p>
